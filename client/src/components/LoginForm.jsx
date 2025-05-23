@@ -4,6 +4,7 @@ import auth from '../js/auth';
 import { login } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Button from './Button';
  
 function LoginForm() {
 
@@ -44,7 +45,12 @@ function LoginForm() {
                     <div> <a href="#" className='text-[#782ba7] font-bold'>Forgot Password?</a> </div>
                 </div>
                 <div>
-                    <button type='submit' className='w-full bg-[#782ba7] text-[#fff] p-2 rounded-lg cursor-pointer'>Login</button>
+                    <Button 
+                        type="submit"
+                        style="w-full bg-[#782ba7] text-[#fff]"
+                    >
+                        Login
+                    </Button> 
                 </div>
                 <div>
                     Don't have an account? 

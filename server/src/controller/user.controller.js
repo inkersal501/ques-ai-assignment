@@ -1,4 +1,4 @@
-const {userService} = require("../services"); 
+const { userService } = require("../services"); 
 
 const signUp = async (req, res) => { 
     try {
@@ -26,4 +26,4 @@ const getUser = async (req, res) => {
         res.status(500).send({message: error.message});
     }  
 }
-module.exports = {signUp, signIn, getUser};
+module.exports = { signUp, signIn, getUser };
