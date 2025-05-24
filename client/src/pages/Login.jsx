@@ -1,7 +1,7 @@
 import Logo from '../components/Logo'; 
 import AppName from '../components/Appname';
-import LogoWithAppName from '../components/LogowithAppname';
 import LoginForm from '../components/LoginForm';
+import LogoWithAppName from '../components/LogoWithAppName';
 
 function Login() {
     

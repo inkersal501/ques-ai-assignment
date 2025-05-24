@@ -1,2 +1,6 @@
 const apiEndpoint = import.meta.env.VITE_API_BASE_URL; 
-export default {apiEndpoint};
+
+const slugify = (title) =>
+  title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
+
+export default {apiEndpoint, slugify};

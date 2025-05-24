@@ -10,7 +10,7 @@ const login = async (email, password) => {
         if(result.status === 200){
             toast.success(result.data.message);     
             const {user, token} =  result.data;
-            return {user, token};
+            return {...user, token};
         }            
     } catch (error) {  
         toast.error(error.response.data.message);

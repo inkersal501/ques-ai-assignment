@@ -1,23 +1,27 @@
-import LogoWithAppName from "../components/LogowithAppname";
 import { IoSettingsOutline } from "react-icons/io5";
-import { MdNotificationsNone } from "react-icons/md"; import { BsPlusCircleFill } from "react-icons/bs";
+import { MdNotificationsNone } from "react-icons/md";
+import { BsPlusCircleFill } from "react-icons/bs";
 import img from "../assets/home-img.png";  
 import CreateProject from "../components/CreateProject";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import { useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from 'react-router-dom';
 import projectJS from "../js/project";
 import ProjectCard from "../components/ProjectCard"; 
-
+import LogoWithAppName from "../components/LogoWithAppName";
+import { updateProjects } from "../store/projectSlice";
+import config from "../js/config";
 function Home() { 
 
     const user = useSelector((state) => state.auth.user); 
+    console.log(user)
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [projects, setProjects] = useState([]);
+    const projects = useSelector((state) => state.project.allProjects || []); 
     const [projectFlag, setProjectFlag] = useState(true);
-
+    
     useEffect(()=> {
         if(!user) {
             navigate("/");
@@ -29,13 +33,14 @@ function Home() {
         async function fetchProjects() {
             const getProject = await projectJS.getAllProjects(user);  
             if(getProject.status && getProject.projects.length > 0){
-                setProjects(getProject.projects);
+                const allprojects = getProject.projects.map(project=>({...project, 'slug': config.slugify(project.name)}));
+                dispatch(updateProjects([...allprojects]));
                 setProjectFlag(false);
             }
         }
         if(projectFlag)
-            fetchProjects();
-        console.log(projectFlag)
+            fetchProjects(); 
+        //eslint-disable-next-line
     }, [projectFlag, user]);
 
     const buttonElement = () => {
@@ -81,7 +86,9 @@ function Home() {
                     <div className="my-[40px]">
                         <div className="flex flex-col md:flex-row flex-wrap gap-10 justify-start items-start md:items-center">
                             {projects.map((project, index)=>(
-                                <ProjectCard key={index} project={project} />
+                                <Link to={`/home/${project.slug}`} key={index}>
+                                    <ProjectCard project={project} />
+                                </Link>
                             ))}
                         </div>
                     </div>
