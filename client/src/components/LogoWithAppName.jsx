@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import AppName from './Appname';
+import AppName from './AppName';
 import Logo from './Logo'; 
  
 function LogoWithAppName({ width = "50px", height = "50px", color = "#fff" }) {

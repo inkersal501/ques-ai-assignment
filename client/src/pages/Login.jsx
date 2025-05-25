@@ -1,5 +1,5 @@
 import Logo from '../components/Logo'; 
-import AppName from '../components/Appname';
+import AppName from '../components/AppName';
 import LoginForm from '../components/LoginForm';
 import LogoWithAppName from '../components/LogoWithAppName';
 
