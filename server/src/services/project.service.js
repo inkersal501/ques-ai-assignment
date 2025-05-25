@@ -1,4 +1,5 @@
-const { projectModel } = require("../models");
+const { projectModel, transcriptModel } = require("../models");
+const { transcripts } = require("./transcript.service");
 
 const create = async (user, name) => {
     if(name === "") 
@@ -11,13 +12,17 @@ const create = async (user, name) => {
         throw new Error("Error creating project."); 
     }
 };
+
 const projects = async (user) => {
     try {
         const projectList = await projectModel.find({user: user._id}).lean();
-        if(projectList.length > 0)  
-            return projectList;
-        else
-            throw new Error("No project found."); 
+    
+        const projectTranscripts = await Promise.all(projectList.map( async (project) => {
+            const transcriptsList = await transcripts(user, project._id);
+            return {...project, transcripts: transcriptsList.length};
+        })); 
+        return projectTranscripts;
+      
     } catch (error) {
         throw new Error("Error fetching projects."); 
     }

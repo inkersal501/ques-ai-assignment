@@ -17,5 +17,17 @@ const login = async (email, password) => {
         return false;
     }
 };
+const signup = async (username, email, password) => {
+    try {
+        const result = await axios.post(`${apiEndpoint}/user/signup`, {username, email, password});
+        if(result.status === 200){
+            toast.success(result.data.message);   
+            return true;
+        }            
+    } catch (error) {  
+        toast.error(error.response.data.message);
+        return false;
+    } 
+  }
 
-export default {login};
+export default {login, signup};

@@ -6,12 +6,13 @@ import CreateProject from "../components/CreateProject";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import projectJS from "../js/project";
 import ProjectCard from "../components/ProjectCard"; 
 import LogoWithAppName from "../components/LogoWithAppName";
-import { updateProjects } from "../store/projectSlice";
+import { updateActive, updateProjects } from "../store/projectSlice";
 import config from "../js/config";
+
 function Home() { 
 
     const user = useSelector((state) => state.auth.user); 
@@ -32,7 +33,7 @@ function Home() {
     useEffect(()=> {
         async function fetchProjects() {
             const getProject = await projectJS.getAllProjects(user);  
-            if(getProject.status && getProject.projects.length > 0){
+            if(getProject.status){
                 const allprojects = getProject.projects.map(project=>({...project, 'slug': config.slugify(project.name)}));
                 dispatch(updateProjects([...allprojects]));
                 setProjectFlag(false);
@@ -86,9 +87,9 @@ function Home() {
                     <div className="my-[40px]">
                         <div className="flex flex-col md:flex-row flex-wrap gap-10 justify-start items-start md:items-center">
                             {projects.map((project, index)=>(
-                                <Link to={`/home/${project.slug}`} key={index}>
+                                <a className="cursor-pointer" onClick={()=>{dispatch(updateActive(project.slug)); navigate(`/home/${project.slug}`)}} key={index}>
                                     <ProjectCard project={project} />
-                                </Link>
+                                </a>
                             ))}
                         </div>
                     </div>

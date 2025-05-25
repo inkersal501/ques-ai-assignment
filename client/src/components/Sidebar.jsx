@@ -4,14 +4,15 @@ import { BsCopy } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import LogoWithAppName from './LogoWithAppName';
 import { useSelector } from 'react-redux';
-import { FaAnglesLeft } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+
 
 function Sidebar() {
 
     const user = useSelector((state) => state.auth.user);
  
     return (
-        <div className='relative bg-white shadow-lg p-[20px] md:p-[40px] w-sm h-screen flex flex-col'>
+        <div className='relative bg-white border border-b-0 border-e-[#ccc] shadow-lg p-[20px] md:p-[40px] w-3xs md:w-sm h-screen flex flex-col'>
             <LogoWithAppName width="35px" color='#782ba7' />
 
             <div className="flex-1 flex flex-col justify-between mt-10"> 
@@ -42,16 +43,17 @@ function Sidebar() {
                     </div>
 
                     <hr className='text-[#ccc]' />
-
-                    <div className="flex items-center gap-2 text-gray-800 mt-3">
-                        <div className="bg-[#782ba7] p-4 rounded-lg">
-                            <FaUserCircle size={24} color="#fff" />
+                    <Link to="/profile">
+                        <div className="flex items-center gap-2 text-gray-800 mt-3">
+                            <div className="bg-[#782ba7] p-4 rounded-lg">
+                                <FaUserCircle size={24} color="#fff" />
+                            </div>
+                            <div>
+                                <h6 className="font-semibold text-md">{user.username}</h6>
+                                <h6 className="text-sm text-gray-500">{user.email}</h6>
+                            </div>
                         </div>
-                        <div>
-                            <h6 className="font-semibold text-md">{user.username}</h6>
-                            <h6 className="text-sm text-gray-500">{user.email}</h6>
-                        </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
             

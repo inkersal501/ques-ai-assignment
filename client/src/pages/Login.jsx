@@ -10,8 +10,8 @@ function Login() {
         <div className='h-screen flex flex-col md:flex-row'>
             <div className='bg-[#782ba7] p-[40px] w-full md:w-[70%]'>
                 <LogoWithAppName color='#fff'/>
-                <div style={{color:"#fff"}} className='mt-5 w-full md:w-50'>
-                    <h1 style={{fontWeight:"normal"}} className='text-5xl leading-[1.2]'>Your podcast will no longer be just a hobby</h1>
+                <div style={{color:"#fff"}} className='mt-10 w-full md:w-80'>
+                    <h1 className='text-5xl leading-[1.2]'>Your podcast will no longer be just a hobby</h1>
                     <h4 className='text-xl mt-5'>Supercharge Your Distribution using our AI assistant!</h4>
                 </div>
             </div>

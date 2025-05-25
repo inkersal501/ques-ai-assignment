@@ -16,7 +16,7 @@ function Breadcrum({ level1, level1to, level2, level3 }) {
         </Link>
         )}
 
-        {(level2 || level3) && <span>/</span>}
+        {(level2) && <span>/</span>}
 
         {level2 && (
         <span className="flex items-center space-x-2">

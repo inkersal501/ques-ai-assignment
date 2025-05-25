@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Modal from './Modal';
-// import projectJS from "../js/project";
+import transcriptJS from "../js/transcript";
 import { useSelector } from 'react-redux';
 import Button from './Button';
 import youtubeImg from "../assets/youtube.png";
 import { IoClose } from "react-icons/io5";
 
-function CreateTranscript({isOpen, handleModal, handleFlag}) {
+function CreateTranscript({isOpen, handleModal, handleFlag, project}) {
 
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState("");
@@ -24,10 +24,10 @@ function CreateTranscript({isOpen, handleModal, handleFlag}) {
             setTranscriptError("Transcript can't be empty");
         else
             setTranscriptError("");
-        user;
-        //  await projectJS.createProject(user, transcript); 
-            // handleFlag(true);
-            // handleModal(false);
+        
+        await transcriptJS.createTranscript(user, project, name, transcript); 
+        handleFlag(true);
+        handleModal(false);
     }
 
     return (
