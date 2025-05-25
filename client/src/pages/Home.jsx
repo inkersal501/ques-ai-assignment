@@ -12,11 +12,13 @@ import ProjectCard from "../components/ProjectCard";
 import LogoWithAppName from "../components/LogoWithAppName";
 import { updateActive, updateProjects } from "../store/projectSlice";
 import config from "../js/config";
+import { toast } from 'react-toastify';
+import { logout } from '../store/authSlice';
+import { FiLogOut } from "react-icons/fi"; 
 
 function Home() { 
 
     const user = useSelector((state) => state.auth.user); 
-    console.log(user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,6 +46,12 @@ function Home() {
         //eslint-disable-next-line
     }, [projectFlag, user]);
 
+    const handleLogout = ()=>{
+        dispatch(logout());
+        navigate("/");
+        toast.success("Logout successfully.");
+    }
+    
     const buttonElement = () => {
         return  (
             <Button 
@@ -58,9 +66,12 @@ function Home() {
         <div className="p-[20px] md:p-[40px]">
             <div className="flex justify-between items-center py-5">
                 <LogoWithAppName color="#782ba7"/>          
-                <div className="flex gap-3">
+                <div className="flex gap-3 items-center">
                     <IoSettingsOutline className="text-2xl" />
                     <MdNotificationsNone className="text-2xl" />
+                    <span className='rounded-full border border-[#ccc] p-2 cursor-pointer'>
+                        <FiLogOut size="20" color="red" onClick={()=>handleLogout()}/>
+                    </span>
                 </div>  
             </div>
             {projects.length == 0 ? (

@@ -18,7 +18,6 @@ const signUp = async (req) => {
 };
 
 const signIn = async ({email, password}) => {
-    console.log(email, password)
     const user = await userModel.findOne({ email });
     if (!user) throw new Error("User not found.");
 
