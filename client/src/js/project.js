@@ -35,8 +35,8 @@ const getAllProjects = async (user) => {
 
 const reduceProjectName = (name) => {
     const arr = name.split(" ");
-    const letters = arr.map((e) => e[0].toUpperCase()).join("");
-    return letters;
+    const letters = arr.map((e) => e[0].toUpperCase());
+    return letters[0]+""+(letters[1]?letters[1]:"");
 
 };
 
